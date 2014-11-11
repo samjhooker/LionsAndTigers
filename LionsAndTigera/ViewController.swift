@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var breedLabel: UILabel!
     
+    var myTigers:[Tiger] = [] //defined outside function therefroe can be used anywhere
     
     
     override func viewDidLoad() {
@@ -27,7 +28,9 @@ class ViewController: UIViewController {
         myTiger.age = 3
         myTiger.image = UIImage(named: "BengalTiger.jpg")
         
-        println("my tigers name is \(myTiger.name), its age is \(myTiger.age), its breed is \(myTiger.breed), its image is \(myTiger.image)")
+        myTigers.append(myTiger)
+        
+        //println("my tigers name is \(myTiger.name), its age is \(myTiger.age), its breed is \(myTiger.breed), its image is \(myTiger.image)")
         
         myImageView.image = myTiger.image
         nameLabel.text = myTiger.name
@@ -53,6 +56,7 @@ class ViewController: UIViewController {
         forthTiger.age = 5
         forthTiger.image = UIImage(named: "SiberianTiger.jpg")
         
+        myTigers += [secondTiger, thirdTiger, forthTiger] //appends all to tigers array
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,6 +65,15 @@ class ViewController: UIViewController {
     }
 
     @IBAction func nextBarButonPressed(sender: AnyObject) {
+        var randomIndex = Int(arc4random_uniform(UInt32(myTigers.count)))
+        let tiger = myTigers[randomIndex]
+        
+        myImageView.image = tiger.image
+        nameLabel.text = tiger.name
+        ageLabel.text = "\(tiger.age)"
+        breedLabel.text = tiger.breed
+        
+        
         
     }
    
