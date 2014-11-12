@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var breedLabel: UILabel!
     
     var myTigers:[Tiger] = [] //defined outside function therefroe can be used anywhere
-    
+    var currentIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +65,14 @@ class ViewController: UIViewController {
     }
 
     @IBAction func nextBarButonPressed(sender: AnyObject) {
-        var randomIndex = Int(arc4random_uniform(UInt32(myTigers.count)))
+        
+        var randomIndex:Int
+        do {
+            randomIndex = Int(arc4random_uniform(UInt32(myTigers.count)))
+        } while randomIndex == currentIndex
+        currentIndex = randomIndex
+        
+        
         let tiger = myTigers[randomIndex]
         
 //        myImageView.image = tiger.image
@@ -73,7 +80,7 @@ class ViewController: UIViewController {
 //        ageLabel.text = "\(tiger.age)"
 //        breedLabel.text = tiger.breed
         
-        UIView.transitionWithView(self.view, duration: 2, options: UIViewAnimationOptions.TransitionCurlDown, animations: {
+        UIView.transitionWithView(self.view, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
             self.myImageView.image = tiger.image
             self.nameLabel.text = tiger.name
             self.ageLabel.text = "\(tiger.age)"
