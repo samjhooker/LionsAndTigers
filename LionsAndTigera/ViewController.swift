@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var breedLabel: UILabel!
+    @IBOutlet weak var randomFactLabel: UILabel!
     
     var myTigers:[Tiger] = [] //defined outside function therefroe can be used anywhere
     var currentIndex = 0
@@ -28,14 +29,20 @@ class ViewController: UIViewController {
         myTiger.age = 3
         myTiger.image = UIImage(named: "BengalTiger.jpg")
         
+        myTiger.age = myTiger.ageInTigerYearsFromAge(myTiger.age)
+        
         myTigers.append(myTiger)
         
+        
+        //myTiger.chuff()
         //println("my tigers name is \(myTiger.name), its age is \(myTiger.age), its breed is \(myTiger.breed), its image is \(myTiger.image)")
         
         myImageView.image = myTiger.image
         nameLabel.text = myTiger.name
         ageLabel.text = "\(myTiger.age)"
         breedLabel.text = myTiger.breed
+        randomFactLabel.text = myTiger.randomFact()
+        
         
         
         var secondTiger = Tiger()
@@ -44,11 +51,15 @@ class ViewController: UIViewController {
         secondTiger.age = 2
         secondTiger.image = UIImage(named: "IndochineseTiger.jpg")
         
+        secondTiger.age = secondTiger.ageInTigerYearsFromAge(secondTiger.age)
+        
         var thirdTiger = Tiger()
         thirdTiger.name = "Jcob"
         thirdTiger.breed = "Malayan Tiger"
         thirdTiger.age = 4
         thirdTiger.image = UIImage(named: "MalayanTiger.jpg")
+        
+        thirdTiger.age = thirdTiger.ageInTigerYearsFromAge(thirdTiger.age)
         
         var forthTiger = Tiger()
         forthTiger.name = "Spar"
@@ -56,7 +67,11 @@ class ViewController: UIViewController {
         forthTiger.age = 5
         forthTiger.image = UIImage(named: "SiberianTiger.jpg")
         
+        forthTiger.age = forthTiger.ageInTigerYearsFromAge(forthTiger.age)
         myTigers += [secondTiger, thirdTiger, forthTiger] //appends all to tigers array
+        
+        myTiger.chuffANumberOfTimes(3)
+        myTiger.chuffANumberOfTimes(4, isLoud: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,6 +100,7 @@ class ViewController: UIViewController {
             self.nameLabel.text = tiger.name
             self.ageLabel.text = "\(tiger.age)"
             self.breedLabel.text = tiger.breed
+            self.randomFactLabel.text = tiger.randomFact()
         }, completion: {
             (finished: Bool) -> () in
         })
